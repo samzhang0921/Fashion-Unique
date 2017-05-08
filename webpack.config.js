@@ -16,9 +16,9 @@ var config = {
   module: {
     loaders: [
       {
-        test: '/\.jsx?$/',
+        test: /\.jsx?$/,
         include: SRC_DIR,
-        loader: "babel",
+        loader: "babel-loader",
         exclude: /node_modules/,
         query: {
           presets: ['react', 'es2015', 'stage-2']
