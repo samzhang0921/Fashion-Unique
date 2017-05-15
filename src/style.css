@@ -22,3 +22,11 @@
 .clearBoth {
   clear: both;
 }
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.filters {
+}
