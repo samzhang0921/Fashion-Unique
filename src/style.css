@@ -1,0 +1,24 @@
+.listItem {
+  width: 224px;
+  height: 367px;
+  display: block;
+  float: left;
+  padding-left: 30px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+  text-align: left;
+  font-family: GillSans, "Gill Sans MT", Calibri, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: .1px;
+  box-sizing: border-box;
+}
+
+.listItemDescription {
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.clearBoth {
+  clear: both;
+}

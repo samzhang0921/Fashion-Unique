@@ -16,13 +16,30 @@ var config = {
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /\.js$/,
         include: SRC_DIR,
-        loader: "babel-loader",
+        loader: 'react-hot-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.js$/,
+        include: SRC_DIR,
+        loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
           presets: ['react', 'es2015', 'stage-2']
         }
+      }, {
+        test: /\.css$/,
+        loader: 'style-loader'
+      }, {
+        test: /\.css$/,
+        loader: 'css-loader',
+        query: {
+          modules: true,
+          localIdentName: '[name]__[local]___[hash:base64:5]'
+        }
+
       }
     ]
   }
