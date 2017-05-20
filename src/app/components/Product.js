@@ -24,7 +24,7 @@ export default class Product extends React.Component {
   render() {
     const price = this.props.product.price.amount/this.props.product.price.divisor;
     return (
-      <div onMouseEnter={this.toggleImage} onMouseLeave={this.toggleImage} className={style.listItem}>
+      <div onMouseEnter={this.toggleImage} onMouseLeave={this.toggleImage} className="listItem">
         <div><img data-image={this.state.altUrl} src={this.state.imgUrl} /></div>
         <div className={style.listItemDescription}>
         {this.props.product.name}

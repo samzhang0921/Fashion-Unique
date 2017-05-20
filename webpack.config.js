@@ -1,9 +1,9 @@
-var path = require('path');
+const path = require('path');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const DIST_DIR = path.resolve(__dirname, "dist");
+const SRC_DIR = path.resolve(__dirname, "src");
 
-var DIST_DIR = path.resolve(__dirname, "dist");
-var SRC_DIR = path.resolve(__dirname, "src");
-
-var config = {
+const config = {
   entry: SRC_DIR + "/app/index.js",
   output: {
     path: DIST_DIR + "/app",
@@ -14,7 +14,7 @@ var config = {
     extensions: ['.js', '.jsx']
   },
   module: {
-    loaders: [
+      rules: [
       {
         test: /\.js$/,
         include: SRC_DIR,
@@ -29,20 +29,20 @@ var config = {
         query: {
           presets: ['react', 'es2015', 'stage-2']
         }
-      }, {
+      },
+      {
         test: /\.css$/,
-        loader: 'style-loader'
-      }, {
-        test: /\.css$/,
-        loader: 'css-loader',
-        query: {
-          modules: true,
-          localIdentName: '[name]__[local]___[hash:base64:5]'
-        }
-
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader",
+           allChunks: true
+        }),
       }
     ]
-  }
+  },
+  plugins: [
+   new ExtractTextPlugin("styles.css")
+ ]
 };
 
 module.exports = config;

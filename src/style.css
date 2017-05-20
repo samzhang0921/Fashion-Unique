@@ -1,3 +1,22 @@
+main {
+    max-width: 950px;
+    min-width: 950px;
+    margin: 0 auto 20px
+}
+
+.subnav {
+    float: left;
+    width: 183px;
+    padding: 13px 0 0;
+    position: relative;
+}
+.productsList{
+    width: 762px;
+    position: relative;
+    float: left;
+    overflow: visible;
+}
+
 .listItem {
   width: 224px;
   height: 367px;
