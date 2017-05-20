@@ -65,10 +65,10 @@ export default class Listing extends React.Component {
         <div className={style.container}>
           <Header listInfo={this.state.data.listInfo}/>
         </div>
-        <div className="subnav">
+        <div className={style.subnav}>
           <Filters categories={categories} designers={designers}/>
         </div>
-        <div id="listing" className="productsList">
+        <div id="listing" className={style.productsList}>
           {this.state.data.summaries.map(pid => {
             const imgUrl = `https://cache.net-a-porter.com/images/products/${pid.id}/${pid.id}_ou_sl.jpg`;
             const altUrl = `https://cache.net-a-porter.com/images/products/${pid.id}/${pid.id}_in_sl.jpg`
