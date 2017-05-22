@@ -11,10 +11,17 @@ export default class Listing extends React.Component {
     super(props);
     this.state = {
       data: {},
-      mouseOver: false
+      mouseOver: false,
+      viewBtnClicked: false
     };
+    this.handleButton = this.handleButton.bind(this);
   }
-
+  // listChangeView(nPV, nOV){
+  //   this.setState({
+  //     productsView: nPV,
+  //     outfiteView: nOV
+  //   })
+  // }
   componentDidMount() {
     console.log('componentDidMount');
     const lang = this.props.lang;
@@ -40,6 +47,13 @@ export default class Listing extends React.Component {
     return categories;
   }
 
+  handleButton(viewBtnClicked) {
+    this.setState({
+        viewBtnClicked
+    });
+    console.log(this.state.viewBtnClicked);
+  }
+
   getDesigners(summariesArr) {
     let designers = [];
 
@@ -62,16 +76,24 @@ export default class Listing extends React.Component {
 
     return (
       <div>
-        <div className={style.container}>
-          <Header listInfo={this.state.data.listInfo}/>
+        <div>
+          <Header
+          listInfo={this.state.data.listInfo}
+          pView={this.state.pView}
+          onButtonClick={this.handleButton}
+
+           />
         </div>
         <div className={style.subnav}>
           <Filters categories={categories} designers={designers}/>
         </div>
         <div id="listing" className={style.productsList}>
           {this.state.data.summaries.map(pid => {
-            const imgUrl = `https://cache.net-a-porter.com/images/products/${pid.id}/${pid.id}_ou_sl.jpg`;
-            const altUrl = `https://cache.net-a-porter.com/images/products/${pid.id}/${pid.id}_in_sl.jpg`
+            const fit1 = this.state.viewBtnClicked ? 'in' : 'ou';
+            const fit2 = this.state.viewBtnClicked ? 'ou' : 'in';
+            const imgUrl = `https://cache.net-a-porter.com/images/products/${pid.id}/${pid.id}_${fit1}_sl.jpg`;
+            const altUrl = `https://cache.net-a-porter.com/images/products/${pid.id}/${pid.id}_${fit2}_sl.jpg`;
+
             return <Product key={pid.id} product={pid} imgUrl={imgUrl} altUrl={altUrl}/>
           })}
         </div>

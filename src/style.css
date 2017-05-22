@@ -11,8 +11,9 @@ main {
     position: relative;
 }
 .productsList{
-    width: 762px;
+    width: 702px;
     position: relative;
+    padding: 0px 30px;
     float: left;
     overflow: visible;
 }
@@ -23,7 +24,7 @@ main {
   display: block;
   float: left;
   padding-left: 30px;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   margin-top: 20px;
   text-align: left;
   font-family: GillSans, "Gill Sans MT", Calibri, sans-serif;
@@ -45,7 +46,24 @@ main {
 .container {
   display: flex;
   flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-around;
+  border-top: 0;
+  border-bottom: 1px dotted #999;
+  float: none;
+  clear: both;
+  bottom: 8px;
+  position: relative;
 }
 
-.filters {
+.sortBox{
+  flex: 1 auto;
+}
+.titleBox{
+  flex: 2 auto;
+  text-align: center;
+}
+.pagenationBox {
+  flex: 1 auto;
+  text-align: right;
 }

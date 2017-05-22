@@ -7,17 +7,17 @@ export default class Product extends React.Component {
       mouseOver: false,
       imgUrl: this.props.imgUrl,
       altUrl: this.props.altUrl
+
     };
     this.toggleImage = this.toggleImage.bind(this);
   }
 
   toggleImage() {
-    let mouse = !this.state.mouseOver;
-    const state = this.state;
+    let { mouse } = this.state;
     this.setState({
-      mouseOver: mouse,
-      imgUrl: state.altUrl,
-      altUrl: state.imgUrl
+      mouseOver: !mouse,
+      imgUrl: this.state.altUrl,
+      altUrl: this.state.imgUrl
     });
   }
 
