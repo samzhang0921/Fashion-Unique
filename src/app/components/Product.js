@@ -4,28 +4,27 @@ export default class Product extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mouseOver: false,
-      imgUrl: this.props.imgUrl,
-      altUrl: this.props.altUrl
+      mouseOver: false
 
     };
     this.toggleImage = this.toggleImage.bind(this);
   }
 
   toggleImage() {
-    let { mouse } = this.state;
+    let { mouseOver } = this.state;
     this.setState({
-      mouseOver: !mouse,
-      imgUrl: this.state.altUrl,
-      altUrl: this.state.imgUrl
+      mouseOver: !mouseOver,
     });
   }
 
   render() {
     const price = this.props.product.price.amount/this.props.product.price.divisor;
+    const { imgUrl, altUrl } = this.props;
+    const finalImageUrl = this.state.mouseOver ? altUrl : imgUrl;
+
     return (
       <div onMouseEnter={this.toggleImage} onMouseLeave={this.toggleImage} className={style.listItem}>
-        <div><img data-image={this.state.altUrl} src={this.state.imgUrl} /></div>
+        <div><img src={finalImageUrl} /></div>
         <div className={style.listItemDescription}>
         {this.props.product.name}
         <br/>

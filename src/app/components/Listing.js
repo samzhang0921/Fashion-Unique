@@ -51,7 +51,6 @@ export default class Listing extends React.Component {
     this.setState({
         viewBtnClicked
     });
-    console.log(this.state.viewBtnClicked);
   }
 
   getDesigners(summariesArr) {
