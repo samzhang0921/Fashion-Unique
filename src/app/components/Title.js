@@ -14,10 +14,10 @@ export default class Title extends React.Component {
     return (
       <div className={style.titleBox}>
         <h1>All Products</h1>
-        <div>
-            <span>
-                <span>{this.props.totaleProducts}</span>&nbsp;<span>Results</span>
-            </span>
+        <div className={style.resultsBox}>
+            <div>
+                <span>{this.props.totaleProducts}&nbsp;Results</span>
+            </div>
         </div>
     </div>
     );

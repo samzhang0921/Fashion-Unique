@@ -5,7 +5,7 @@ import Listing from "./components/Listing";
 
 class App extends React.Component {
   render(){
-    const language = "zh";
+    const language = "en";
     return (
       <div>
           <Listing lang={language} />

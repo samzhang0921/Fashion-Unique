@@ -24,7 +24,7 @@ export default class Sort extends React.Component {
 
       <div className={style.sortBox}>
         <button onClick={()=>this.changeView(this.state.buttonClicked)}>{buttonText}</button>
-        <div id="sort-by" class="sort-by">
+        <div id="sort-by" className="sort-by">
           <form name="formPrice" method="get" id="product-list-price-filter">
 
             <select name="sortOrder">

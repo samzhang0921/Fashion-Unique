@@ -57,13 +57,63 @@ main {
 }
 
 .sortBox{
-  flex: 1 auto;
+  flex: 1;
+  align-self: baseline;
+  display: flex;
 }
 .titleBox{
-  flex: 2 auto;
+  flex: 2;
   text-align: center;
+  align-self: baseline;
+}
+.titleBox h1{
+  margin-bottom: 10px;
+}
+.resultsBox{
+
+  margin-bottom: -10px;
+}
+.resultsBox span {
+  padding:5px 15px;
+  background-color: white;
 }
 .pagenationBox {
-  flex: 1 auto;
+  flex: 1;
   text-align: right;
+  align-self: baseline;
+}
+
+.pagenationBoxUl {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin: 0px;
+}
+
+.pagenationBoxLi {
+margin-right: 5px;
+align-self: auto;
+cursor: pointer;
+}
+.pagenationBoxCurrentPage {
+margin-right: 5px;
+align-self: auto;
+}
+.pagination-dot {
+  cursor: inherit;
+}
+.pagination--1 {
+    border-width: 4.5px 7.8px 4.5px 0;
+    border-color: transparent #000 transparent transparent;
+    margin-bottom: 5px;
+    border-style: solid;
+}
+
+.pagination-0 {
+    border-width: 4.5px 0 4.5px 7.8px;
+    border-color: transparent transparent transparent #000;
+    margin-bottom: 5px;
+    border-style: solid;
 }
