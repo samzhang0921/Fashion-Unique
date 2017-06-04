@@ -53,18 +53,18 @@ export default class Pagination extends React.Component {
         }
       }
     }
-    console.log(pagenationArray);
+    // console.log(pagenationArray);
     return pagenationArray;
 
   };
 
   render() {
-    let pagenations = this.getPagenation(this.props.currentPage, this.props.totalPage);
+    let pagenations = this.getPagenation(this.props.currentPage,this.props.totalPage);
     return (
       <div className={style.pagenationBox}>
         <ul className={style.pagenationBoxUl}>
           {pagenations.map((pagenation, index) => {
-            return <Page key={index} page={pagenation} currentPage={this.props.currentPage} totalPage={this.props.totalPage}/>
+            return <Page key={index} page={pagenation} currentPage={this.props.currentPage} totalPage={this.props.totalPage} setOffset={this.props.setOffset}/>
           })}
         </ul>
       </div>

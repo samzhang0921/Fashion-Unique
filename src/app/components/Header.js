@@ -15,15 +15,13 @@ export default class Header extends React.Component {
   };
 
   render() {
-    const totalPage = Math.ceil(this.props.listInfo.total/this.props.listInfo.limit);
-    const currentPage = parseInt(Math.floor(this.props.listInfo.offset/this.props.listInfo.limit)) +1;
     return (
       <div className={style.container}>
         <Sort
         onButtonClick= {this.props.onButtonClick}
         />
         <Title totaleProducts={this.props.listInfo.total}/>
-        <Pagination currentPage={currentPage} totalPage={totalPage} />
+        <Pagination currentPage={this.props.currentPage} totalPage={this.props.totalPage} setOffset={this.props.setOffset}/>
       </div>
     );
 

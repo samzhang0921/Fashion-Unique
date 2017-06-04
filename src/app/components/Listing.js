@@ -12,9 +12,11 @@ export default class Listing extends React.Component {
     this.state = {
       data: {},
       mouseOver: false,
-      viewBtnClicked: false
+      viewBtnClicked: false,
+      offset: 0
     };
     this.handleButton = this.handleButton.bind(this);
+    this.setOffset = this.setOffset.bind(this);
   }
   // listChangeView(nPV, nOV){
   //   this.setState({
@@ -25,7 +27,7 @@ export default class Listing extends React.Component {
   componentDidMount() {
     console.log('componentDidMount');
     const lang = this.props.lang;
-    const url = `http://api.net-a-porter.com/NAP/GB/${lang}/60/0/summaries?visibility=any-visible`;
+    const url = `http://api.net-a-porter.com/NAP/GB/${lang}/60/${this.state.offset}/summaries?visibility=any-visible`;
     fetch(url).then(res => {
       return res.json()
     }).then(res => {
@@ -48,9 +50,7 @@ export default class Listing extends React.Component {
   }
 
   handleButton(viewBtnClicked) {
-    this.setState({
-        viewBtnClicked
-    });
+    this.setState({viewBtnClicked});
   }
 
   getDesigners(summariesArr) {
@@ -65,6 +65,22 @@ export default class Listing extends React.Component {
     return designers;
   }
 
+  setOffset(newOffet) {
+    this.setState({offset: newOffet});
+    console.log(this.state.offset);
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    // return a boolean value
+    console.log(nextState);
+    const lang = this.props.lang;
+    const url = `http://api.net-a-porter.com/NAP/GB/${lang}/60/${this.state.offset}/summaries?visibility=any-visible`;
+    fetch(url).then(res => {
+      return res.json()
+    }).then(res => {
+      this.setState({data: res});
+    })
+    return nextState
+  }
   render() {
     if (!this.state.data.summaries) {
       return <div>loading</div>
@@ -73,23 +89,25 @@ export default class Listing extends React.Component {
     const categories = this.getCatgories(this.state.data.summaries);
     const designers = this.getDesigners(this.state.data.summaries);
 
+    const totalPage = Math.ceil(this.state.data.listInfo.total / this.state.data.listInfo.limit);
+    const currentPage = parseInt(Math.floor(this.state.data.listInfo.offset / this.state.data.listInfo.limit)) + 1;
+
     return (
       <div>
         <div>
-          <Header
-          listInfo={this.state.data.listInfo}
-          pView={this.state.pView}
-          onButtonClick={this.handleButton}
-
-           />
+          <Header listInfo={this.state.data.listInfo} onButtonClick={this.handleButton} currentPage={currentPage} totalPage={totalPage} setOffset={this.setOffset}/>
         </div>
         <div className={style.subnav}>
           <Filters categories={categories} designers={designers}/>
         </div>
         <div id="listing" className={style.productsList}>
           {this.state.data.summaries.map(pid => {
-            const fit1 = this.state.viewBtnClicked ? 'in' : 'ou';
-            const fit2 = this.state.viewBtnClicked ? 'ou' : 'in';
+            const fit1 = this.state.viewBtnClicked
+              ? 'in'
+              : 'ou';
+            const fit2 = this.state.viewBtnClicked
+              ? 'ou'
+              : 'in';
             const imgUrl = `https://cache.net-a-porter.com/images/products/${pid.id}/${pid.id}_${fit1}_sl.jpg`;
             const altUrl = `https://cache.net-a-porter.com/images/products/${pid.id}/${pid.id}_${fit2}_sl.jpg`;
 

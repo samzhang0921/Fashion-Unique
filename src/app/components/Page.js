@@ -5,45 +5,22 @@ export default class Page extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.getHtml = this.getHtml.bind(this);
+    this.changePage = this.changePage.bind(this);
   };
 
-  getHtml(page, currentPage) {
-    if (isNaN(page)) {
-      return (
-        <li className={style.pagenationBoxLi}>
-          <span>{page}</span>
-        </li>
-      )
-    } else {
-      if (page === -1) {
-        return (
-          <li className={[style.pagenationBoxLi, style.paginationPrevious, style.paginationArrow].join(" ")}>
-            <span></span>
-          </li>
-        )
-      }
-      if (page === 0) {
-        return (
-          <li className={[style.pagenationBoxLi, style.paginationNext, style.paginationArrow].join(" ")}>
-            <span></span>
-          </li>
-        )
-      }
-      if (page === currentPage) {
-        return (
-          <li className={style.pagenationBoxLi}>
-            <span>{page}</span>
-          </li>
-        )
-      }
-      if (page > 0) {
-        return (
-          <li className={style.pagenationBoxLi}>
-            <a href={"?pn=" + page}>{page}</a>
-          </li>
-        )
-      }
+  changePage(page) {
+    if (page < 0) {
+      const npage = (this.props.currentPage === 1)
+        ? 0
+        : (this.props.currentPage-2) * 60;
+      this.props.setOffset(npage)
+    } else if (page === 0) {
+      const npage = (this.props.currentPage === this.props.totalPage)
+        ? (this.props.totalPage - 1) * 60
+        : this.props.currentPage * 60;
+      this.props.setOffset(npage)
+    } else if (page > 0){
+      this.props.setOffset((this.props.page - 1) * 60)
     }
   }
 
@@ -55,17 +32,16 @@ export default class Page extends React.Component {
     const dot = (isNaN(this.props.page))
       ? 'dot'
       : this.props.page;
-    return ( this.props.page === this.props.currentPage
-      ? <li className={style.pagenationBoxCurrentPage}>
-        <span>{this.props.currentPage}</span>
-      </li>
-      : <li className={[
-        style['pagination-'+dot],
+    return (this.props.page === this.props.currentPage
+      ? <li onClick={() => this.changePage(this.props.page)} className={style.pagenationBoxCurrentPage}>
+          <span>{this.props.currentPage}</span>
+        </li>
+      : <li onClick={() => this.changePage(this.props.page)} className={[
+        style['pagination-' + dot],
         style.pagenationBoxLi
       ].join(" ")}>
         <span>{arrow}</span>
-      </li>
-    )
+      </li>)
 
   };
 
