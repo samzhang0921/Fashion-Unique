@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import style from '../../style.css';
-import Page from './Page'
+import PageNumber from './PageNumber'
 export default class Pagination extends React.Component {
   constructor(props) {
     super(props);
@@ -64,7 +64,7 @@ export default class Pagination extends React.Component {
       <div className={style.pagenationBox}>
         <ul className={style.pagenationBoxUl}>
           {pagenations.map((pagenation, index) => {
-            return <Page key={index} page={pagenation} currentPage={this.props.currentPage} totalPage={this.props.totalPage} setOffset={this.props.setOffset}/>
+            return <PageNumber key={index} page={pagenation} currentPage={this.props.currentPage} totalPage={this.props.totalPage} setData={this.props.setData}/>
           })}
         </ul>
       </div>

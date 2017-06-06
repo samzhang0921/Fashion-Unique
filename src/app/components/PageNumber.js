@@ -13,14 +13,14 @@ export default class Page extends React.Component {
       const npage = (this.props.currentPage === 1)
         ? 0
         : (this.props.currentPage-2) * 60;
-      this.props.setOffset(npage)
+      this.props.setData(npage)
     } else if (page === 0) {
       const npage = (this.props.currentPage === this.props.totalPage)
         ? (this.props.totalPage - 1) * 60
         : this.props.currentPage * 60;
-      this.props.setOffset(npage)
+      this.props.setData(npage)
     } else if (page > 0){
-      this.props.setOffset((this.props.page - 1) * 60)
+      this.props.setData((this.props.page - 1) * 60)
     }
   }
 

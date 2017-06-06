@@ -21,7 +21,7 @@ export default class Header extends React.Component {
         onButtonClick= {this.props.onButtonClick}
         />
         <Title totaleProducts={this.props.listInfo.total}/>
-        <Pagination currentPage={this.props.currentPage} totalPage={this.props.totalPage} setOffset={this.props.setOffset}/>
+        <Pagination currentPage={this.props.currentPage} totalPage={this.props.totalPage} setData={this.props.setData}/>
       </div>
     );
 

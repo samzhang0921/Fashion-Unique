@@ -16,14 +16,9 @@ export default class Listing extends React.Component {
       offset: 0
     };
     this.handleButton = this.handleButton.bind(this);
-    this.setOffset = this.setOffset.bind(this);
+    this.setData = this.setData.bind(this);
   }
-  // listChangeView(nPV, nOV){
-  //   this.setState({
-  //     productsView: nPV,
-  //     outfiteView: nOV
-  //   })
-  // }
+
   componentDidMount() {
     console.log('componentDidMount');
     const url = `http://api.net-a-porter.com/NAP/GB/${this.props.lang}/60/${this.state.offset}/summaries?visibility=any-visible`;
@@ -33,10 +28,8 @@ export default class Listing extends React.Component {
       this.setState({data: res});
     })
   }
-  setOffset(newOffet) {
-    this.setState({offset: newOffet});
-    console.log(this.state.offset);
-    const newUrl = `http://api.net-a-porter.com/NAP/GB/${this.props.lang}/60/${this.state.offset}/summaries?visibility=any-visible`;
+  setData(newOffset) {
+    const newUrl = `http://api.net-a-porter.com/NAP/GB/${this.props.lang}/60/${newOffset}/summaries?visibility=any-visible`;
     fetch(newUrl).then(res => {
       return res.json()
     }).then(res => {
@@ -75,19 +68,6 @@ export default class Listing extends React.Component {
     return designers;
   }
 
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   // return a boolean value
-  //   console.log(nextState);
-  //   const lang = this.props.lang;
-  //   const url = `http://api.net-a-porter.com/NAP/GB/${lang}/60/${this.state.offset}/summaries?visibility=any-visible`;
-  //   fetch(url).then(res => {
-  //     return res.json()
-  //   }).then(res => {
-  //     this.setState({data: res});
-  //   })
-  //   return nextState
-  // }
   render() {
     if (!this.state.data.summaries) {
       return <div>loading</div>
@@ -102,7 +82,7 @@ export default class Listing extends React.Component {
     return (
       <div>
         <div>
-          <Header listInfo={this.state.data.listInfo} onButtonClick={this.handleButton} currentPage={currentPage} totalPage={totalPage} setOffset={this.setOffset}/>
+          <Header listInfo={this.state.data.listInfo} onButtonClick={this.handleButton} currentPage={currentPage} totalPage={totalPage} setData={this.setData}/>
         </div>
         <div className={style.subnav}>
           <Filters categories={categories} designers={designers}/>
