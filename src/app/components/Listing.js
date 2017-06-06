@@ -26,13 +26,23 @@ export default class Listing extends React.Component {
   // }
   componentDidMount() {
     console.log('componentDidMount');
-    const lang = this.props.lang;
-    const url = `http://api.net-a-porter.com/NAP/GB/${lang}/60/${this.state.offset}/summaries?visibility=any-visible`;
+    const url = `http://api.net-a-porter.com/NAP/GB/${this.props.lang}/60/${this.state.offset}/summaries?visibility=any-visible`;
     fetch(url).then(res => {
       return res.json()
     }).then(res => {
       this.setState({data: res});
     })
+  }
+  setOffset(newOffet) {
+    this.setState({offset: newOffet});
+    console.log(this.state.offset);
+    const newUrl = `http://api.net-a-porter.com/NAP/GB/${this.props.lang}/60/${this.state.offset}/summaries?visibility=any-visible`;
+    fetch(newUrl).then(res => {
+      return res.json()
+    }).then(res => {
+      this.setState({data: res});
+    })
+
   }
 
   getCatgories(summariesArr) {
@@ -65,22 +75,19 @@ export default class Listing extends React.Component {
     return designers;
   }
 
-  setOffset(newOffet) {
-    this.setState({offset: newOffet});
-    console.log(this.state.offset);
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-    // return a boolean value
-    console.log(nextState);
-    const lang = this.props.lang;
-    const url = `http://api.net-a-porter.com/NAP/GB/${lang}/60/${this.state.offset}/summaries?visibility=any-visible`;
-    fetch(url).then(res => {
-      return res.json()
-    }).then(res => {
-      this.setState({data: res});
-    })
-    return nextState
-  }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   // return a boolean value
+  //   console.log(nextState);
+  //   const lang = this.props.lang;
+  //   const url = `http://api.net-a-porter.com/NAP/GB/${lang}/60/${this.state.offset}/summaries?visibility=any-visible`;
+  //   fetch(url).then(res => {
+  //     return res.json()
+  //   }).then(res => {
+  //     this.setState({data: res});
+  //   })
+  //   return nextState
+  // }
   render() {
     if (!this.state.data.summaries) {
       return <div>loading</div>
